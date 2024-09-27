@@ -1,0 +1,17 @@
+Overview of B/G Deployment
+Blue Environment: Contains the current version of the application.
+Green Environment: Contains the new version of the application.
+Traffic Management: Route 53 will manage DNS records to control traffic flow between the blue and green environments.
+Backend Database: Both environments will connect to a shared or dedicated database instance.
+Steps to Achieve B/G Deployment
+1. Infrastructure Setup
+The Terraform code provided earlier sets up two Auto Scaling Groups, two ALBs, and necessary networking components. Ensure you have:
+
+Two EC2 Auto Scaling Groups: One for the blue environment and one for the green environment.
+Two ALBs: Each routing traffic to their respective ASG.
+Route 53: To manage DNS records that will point to the appropriate ALB based on traffic routing.
+2. Database Setup
+For the backend database, you have two primary options:
+
+Single Shared Database: Both environments connect to a single database. This is common but requires careful handling of migrations and changes.
+Dedicated Databases: Each environment has its own database instance. This isolates environments but can complicate deployment and data synchronization.
