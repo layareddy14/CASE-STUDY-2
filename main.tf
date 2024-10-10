@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "ap-south-1"  # Change to your desired region
+  region = "ap-south-1" 
 }
 
 # VPC and Subnets
@@ -77,8 +77,8 @@ resource "aws_security_group" "app_sg" {
 # Launch Template for EC2 Instances
 resource "aws_launch_template" "app" {
   name_prefix   = "app-template"
-  image_id      = "ami-0522ab6e1ddcc7055"  # Update with your AMI
-  instance_type = "t2.micro"  # Change as needed
+  image_id      = "ami-0522ab6e1ddcc7055"  
+  instance_type = "t2.micro"  
     
 
   lifecycle {
