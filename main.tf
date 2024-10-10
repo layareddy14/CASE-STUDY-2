@@ -189,7 +189,7 @@ resource "aws_route53_zone" "main" {
 # Route 53 Record for Blue Environment
 resource "aws_route53_record" "blue_record" {
   zone_id = aws_route53_zone.main.zone_id
-  name     = "app.yourdomain.com"  # Change as needed
+  name     = "app.laya.com"  
   type     = "A"
 
   alias {
@@ -211,4 +211,22 @@ resource "aws_route53_record" "green_record"
     zone_id                = aws_lb.green_lb.zone_id
     evaluate_target_health = false
   }
+}
+
+# Switch Traffic Btwn Blue/Green
+resource "aws_lb_listener" "blue_url" {
+ listener_arn = aws_lb_listener.http.arn
+priority = 100
+
+
+action{
+ type           = "forward"
+target_group_arn = aws_lb_target_group.blue.arn
+}
+
+condition {
+ host_header {
+  values = [ "app.laya.com"]
+ }
+
 }
